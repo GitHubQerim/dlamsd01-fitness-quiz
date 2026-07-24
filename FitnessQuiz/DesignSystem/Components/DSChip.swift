@@ -23,7 +23,7 @@ struct DSChip: View {
             .foregroundColor(foreground)
             .padding(.horizontal, DSSpacing.s12)
             .frame(minWidth: 56)
-            .frame(height: 26)
+            .frame(minHeight: 26)
             .background(background)
             .clipShape(RoundedRectangle(cornerRadius: DSRadius.chip, style: .continuous))
         }

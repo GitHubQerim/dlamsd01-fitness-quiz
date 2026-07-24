@@ -25,9 +25,14 @@ enum DSFont {
         UIFontDescriptor.AttributeName(rawValue: kCTFontVariationAttribute as String)
     private static let wghtAxisIdentifier = 0x77676874 // OpenType 'wght' tag
 
+    /// Builds a Manrope `Font` at the exact weight axis value and scales it
+    /// with the user's Dynamic Type setting (via `UIFontMetrics`), since
+    /// wrapping a raw `UIFont` in `Font(_:)` otherwise ignores it.
     static func manrope(size: CGFloat, weight: CGFloat) -> Font {
         let descriptor = UIFontDescriptor(name: "Manrope", size: size)
             .addingAttributes([wghtAxis: [wghtAxisIdentifier: weight]])
-        return Font(UIFont(descriptor: descriptor, size: size))
+        let baseFont = UIFont(descriptor: descriptor, size: size)
+        let scaledFont = UIFontMetrics(forTextStyle: .body).scaledFont(for: baseFont)
+        return Font(scaledFont)
     }
 }

@@ -70,7 +70,7 @@ struct DSButton: View {
             }
             .foregroundColor(variant.foreground)
             .frame(maxWidth: fullWidth ? .infinity : nil)
-            .frame(height: size.height)
+            .frame(minHeight: size.height)
             .padding(.horizontal, size.horizontalPadding)
             .background(variant.background)
             .clipShape(Capsule())
