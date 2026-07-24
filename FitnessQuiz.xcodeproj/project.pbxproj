@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02EBFEC7E7B1218C1004C416 /* DSChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DDE28423F3B193FA6BFE64 /* DSChip.swift */; };
+		02F696014CE178F8CD64BFF2 /* DSStatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF3F534A055604245F2DEC /* DSStatTile.swift */; };
+		34B1681272AABE4A2B56AB8D /* DSIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E392033048A1D3DCB0552899 /* DSIcon.swift */; };
+		446BBDA23A8FBA26950C22E4 /* DSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDFFDAE0E192F9759DEC08 /* DSButton.swift */; };
 		4E8761E7E6AADC3ED78F6771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF209595118219563BB6645 /* ContentView.swift */; };
 		6FACD63E237FA73F6D96C91B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42094C32AE53B999C8B10482 /* Assets.xcassets */; };
 		8F77602B5D8843DECB2D3A58 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429FEA7CEF5FD9691E993E97 /* Spacing.swift */; };
@@ -15,6 +19,8 @@
 		B8C2954ACE3EF66B763E25E5 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7870085E25965258860EE /* Radius.swift */; };
 		C7424A486A706F5ECDEC9789 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD89D7BBC440AE86ABCEF053 /* Colors.swift */; };
 		CDA707BEC8F540D481C77ED8 /* FitnessQuizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954E6DC5B61F8A822F958CF1 /* FitnessQuizApp.swift */; };
+		EDE34F27BC3E74CBE84DDBC7 /* DSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519FF7A9BAF250FD8D92E6F3 /* DSCard.swift */; };
+		EDF82353D362326E65B63D1E /* DSProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591D3CDFBBD395995B4BBDDF /* DSProgressRing.swift */; };
 		F0F820FB86A89BEAF815659D /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2C005F4FF8C27DEFEAF7CF /* Motion.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,11 +30,17 @@
 		38D7870085E25965258860EE /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		42094C32AE53B999C8B10482 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		429FEA7CEF5FD9691E993E97 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		44DDE28423F3B193FA6BFE64 /* DSChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSChip.swift; sourceTree = "<group>"; };
 		4DF209595118219563BB6645 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		519FF7A9BAF250FD8D92E6F3 /* DSCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSCard.swift; sourceTree = "<group>"; };
+		591D3CDFBBD395995B4BBDDF /* DSProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSProgressRing.swift; sourceTree = "<group>"; };
 		64B7B9938D4F04690AFD7049 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		6CEDFFDAE0E192F9759DEC08 /* DSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSButton.swift; sourceTree = "<group>"; };
 		954E6DC5B61F8A822F958CF1 /* FitnessQuizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessQuizApp.swift; sourceTree = "<group>"; };
 		9732C7D7F1D13319D0568F39 /* Manrope-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Variable.ttf"; sourceTree = "<group>"; };
+		C0AF3F534A055604245F2DEC /* DSStatTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSStatTile.swift; sourceTree = "<group>"; };
 		DD89D7BBC440AE86ABCEF053 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		E392033048A1D3DCB0552899 /* DSIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSIcon.swift; sourceTree = "<group>"; };
 		F373701A8B8199BD510C2C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +69,7 @@
 				38D7870085E25965258860EE /* Radius.swift */,
 				429FEA7CEF5FD9691E993E97 /* Spacing.swift */,
 				64B7B9938D4F04690AFD7049 /* Typography.swift */,
+				ADCB37E8E9B678B02C494458 /* Components */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -67,6 +80,19 @@
 				E7D4D21973066F74C235C94C /* FitnessQuiz */,
 				2A03DBEFC426C67DB18979B9 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		ADCB37E8E9B678B02C494458 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6CEDFFDAE0E192F9759DEC08 /* DSButton.swift */,
+				519FF7A9BAF250FD8D92E6F3 /* DSCard.swift */,
+				44DDE28423F3B193FA6BFE64 /* DSChip.swift */,
+				E392033048A1D3DCB0552899 /* DSIcon.swift */,
+				591D3CDFBBD395995B4BBDDF /* DSProgressRing.swift */,
+				C0AF3F534A055604245F2DEC /* DSStatTile.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		BC070D8CB73B5DD2FF6973CB /* Fonts */ = {
@@ -164,6 +190,12 @@
 			files = (
 				C7424A486A706F5ECDEC9789 /* Colors.swift in Sources */,
 				4E8761E7E6AADC3ED78F6771 /* ContentView.swift in Sources */,
+				446BBDA23A8FBA26950C22E4 /* DSButton.swift in Sources */,
+				EDE34F27BC3E74CBE84DDBC7 /* DSCard.swift in Sources */,
+				02EBFEC7E7B1218C1004C416 /* DSChip.swift in Sources */,
+				34B1681272AABE4A2B56AB8D /* DSIcon.swift in Sources */,
+				EDF82353D362326E65B63D1E /* DSProgressRing.swift in Sources */,
+				02F696014CE178F8CD64BFF2 /* DSStatTile.swift in Sources */,
 				CDA707BEC8F540D481C77ED8 /* FitnessQuizApp.swift in Sources */,
 				F0F820FB86A89BEAF815659D /* Motion.swift in Sources */,
 				B8C2954ACE3EF66B763E25E5 /* Radius.swift in Sources */,
