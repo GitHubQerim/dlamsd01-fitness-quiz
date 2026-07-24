@@ -9,14 +9,26 @@
 /* Begin PBXBuildFile section */
 		4E8761E7E6AADC3ED78F6771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF209595118219563BB6645 /* ContentView.swift */; };
 		6FACD63E237FA73F6D96C91B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42094C32AE53B999C8B10482 /* Assets.xcassets */; };
+		8F77602B5D8843DECB2D3A58 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429FEA7CEF5FD9691E993E97 /* Spacing.swift */; };
+		A26A42049F5A8F7535EC948A /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B7B9938D4F04690AFD7049 /* Typography.swift */; };
+		AAC290D768D575023F39198E /* Manrope-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9732C7D7F1D13319D0568F39 /* Manrope-Variable.ttf */; };
+		B8C2954ACE3EF66B763E25E5 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D7870085E25965258860EE /* Radius.swift */; };
+		C7424A486A706F5ECDEC9789 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD89D7BBC440AE86ABCEF053 /* Colors.swift */; };
 		CDA707BEC8F540D481C77ED8 /* FitnessQuizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954E6DC5B61F8A822F958CF1 /* FitnessQuizApp.swift */; };
+		F0F820FB86A89BEAF815659D /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2C005F4FF8C27DEFEAF7CF /* Motion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C2C005F4FF8C27DEFEAF7CF /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 		2C6FB0F7AA6CF241D6388280 /* FitnessQuiz.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FitnessQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38D7870085E25965258860EE /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		42094C32AE53B999C8B10482 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		429FEA7CEF5FD9691E993E97 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		4DF209595118219563BB6645 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		64B7B9938D4F04690AFD7049 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		954E6DC5B61F8A822F958CF1 /* FitnessQuizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessQuizApp.swift; sourceTree = "<group>"; };
+		9732C7D7F1D13319D0568F39 /* Manrope-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Variable.ttf"; sourceTree = "<group>"; };
+		DD89D7BBC440AE86ABCEF053 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F373701A8B8199BD510C2C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -24,6 +36,7 @@
 		2685ACC49A4776C4909F542E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BC070D8CB73B5DD2FF6973CB /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -39,6 +52,11 @@
 		407CA7CBFFDA10E4E93FC062 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				DD89D7BBC440AE86ABCEF053 /* Colors.swift */,
+				1C2C005F4FF8C27DEFEAF7CF /* Motion.swift */,
+				38D7870085E25965258860EE /* Radius.swift */,
+				429FEA7CEF5FD9691E993E97 /* Spacing.swift */,
+				64B7B9938D4F04690AFD7049 /* Typography.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -49,6 +67,14 @@
 				E7D4D21973066F74C235C94C /* FitnessQuiz */,
 				2A03DBEFC426C67DB18979B9 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		BC070D8CB73B5DD2FF6973CB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9732C7D7F1D13319D0568F39 /* Manrope-Variable.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		E7D4D21973066F74C235C94C /* FitnessQuiz */ = {
@@ -125,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FACD63E237FA73F6D96C91B /* Assets.xcassets in Resources */,
+				AAC290D768D575023F39198E /* Manrope-Variable.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +162,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7424A486A706F5ECDEC9789 /* Colors.swift in Sources */,
 				4E8761E7E6AADC3ED78F6771 /* ContentView.swift in Sources */,
 				CDA707BEC8F540D481C77ED8 /* FitnessQuizApp.swift in Sources */,
+				F0F820FB86A89BEAF815659D /* Motion.swift in Sources */,
+				B8C2954ACE3EF66B763E25E5 /* Radius.swift in Sources */,
+				8F77602B5D8843DECB2D3A58 /* Spacing.swift in Sources */,
+				A26A42049F5A8F7535EC948A /* Typography.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
