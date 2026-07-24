@@ -58,10 +58,13 @@ struct StartView: View {
     }
 
     private var categoryPicker: some View {
-        HStack(spacing: DSSpacing.cardGap) {
-            ForEach(QuizCategory.allCases) { category in
-                DSChip(title: category.displayName, icon: category.iconName, active: viewModel.selectedCategory == category) {
-                    viewModel.selectedCategory = category
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: DSSpacing.cardGap) {
+                ForEach(QuizCategory.allCases) { category in
+                    DSChip(title: category.displayName, icon: category.iconName, active: viewModel.selectedCategory == category) {
+                        viewModel.selectedCategory = category
+                    }
+                    .fixedSize()
                 }
             }
         }
