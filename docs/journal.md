@@ -20,3 +20,14 @@ Kriterium: [transfer, qualität, prozess]
 - Problem (im Simulator-Screenshot entdeckt): Der Kategorie-Chip "Übungsausführung" brach auf zwei Zeilen um und wurde dadurch höher als die Geschwister-Chips. Lösung: Kategorie-Chips in ein horizontales `ScrollView` mit `.fixedSize()` verpackt, analog zur scrollbaren Chip-Reihe im Quell-Design-System.
 - Ressource: eigenes Claude-Design-System-Projekt "GreenDarkFitness" (JSX/CSS-Tokens) als Vorlage für Farben, Typografie, Spacing, Radius und Komponentenverhalten (Button/Card/Chip/ProgressRing/StatTile).
 - Reflexion: Der reine `xcodebuild`-Build-Check allein hätte den Chip-Zeilenumbruch nicht gefunden – erst der Simulator-Screenshot hat das Layoutproblem sichtbar gemacht. Für den Bericht relevant: visuelle Verifikation ist bei UI-Arbeit kein optionaler Schritt.
+
+## 2026-07-24 23:15 – Code-Review (8 Perspektiven) vor der Abgabe an den Nutzer
+Tags: [problem, entscheidung, session]
+Kriterium: [qualität, prozess]
+
+- Was: Vor der Übergabe an den Nutzer lief ein mehrperspektivischer Code-Review über den kompletten Feature-Branch-Diff (Korrektheit, entfernte Invarianten, Cross-File-Aufrufe, Reuse, Simplifizierung, Effizienz, Architektur-Tiefe, CLAUDE.md-Konventionen).
+- Problem: `ResultView` zeigte "Neuer Bestwert!" auch bei einem bloßen Gleichstand mit dem bisherigen Bestwert, weil der Vergleich erst nach dem Überschreiben des UserDefaults-Werts stattfand. Lösung: `QuizViewModel.finishQuiz()` vergleicht jetzt gegen den alten Wert, bevor er überschrieben wird, und publiziert `isNewHighScore` explizit.
+- Problem: Der "Weiter"-Button konnte bei einem sehr schnellen Doppel-Tap theoretisch eine Frage überspringen. Lösung: ein `NextButton`-Wrapper mit `.id(question.id)` blockt einen zweiten Tap pro Frage, ohne die Mehrzweck-Funktion `advanceToNextQuestion()` (auch fürs Laden der ersten Frage genutzt) selbst zu sperren.
+- Aufgeräumt: Kategorie-/Bericht-Header-Wash war in StartView und ResultView dupliziert (→ `DSWashedScreen`), `QuizView`s Antwort-Kacheln bauten `DSCard`s Form doppelt nach (→ `DSCard` um `background`/`borderColor` erweitert), nie genutzte Varianten (`DSButtonVariant.light/.ghost`, `DSButtonSize.md`, `DSCardTone.inset`) entfernt (YAGNI), `DSFont.score` war deklariert aber nirgends verdrahtet (jetzt im Ergebnis-Ring verwendet).
+- Ergänzt: VoiceOver-`.isSelected`-Trait auf den Auswahl-Chips (fehlte komplett).
+- Verifiziert: Alle Fixes per Simulator-Screenshot geprüft, inkl. eines automatisierten Voll-Durchlaufs (Start → Wiederholungsrunde → Ergebnis) über einen temporären Debug-Hook, der danach wieder entfernt wurde – bestätigt u.a., dass der Gleichstand-Fall jetzt korrekt keinen "Neuer Bestwert!"-Banner mehr zeigt.
