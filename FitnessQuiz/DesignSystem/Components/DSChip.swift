@@ -28,5 +28,6 @@ struct DSChip: View {
             .clipShape(RoundedRectangle(cornerRadius: DSRadius.chip, style: .continuous))
         }
         .buttonStyle(DSPressable())
+        .accessibilityAddTraits(active ? .isSelected : [])
     }
 }

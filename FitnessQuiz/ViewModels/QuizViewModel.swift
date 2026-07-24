@@ -27,6 +27,11 @@ final class QuizViewModel: ObservableObject {
     @Published private(set) var firstPassCorrect = 0
     @Published private(set) var firstPassTotal = 0
     @Published private(set) var repeatCorrect = 0
+    /// Whether `firstPassCorrect` beat the previous best when the round
+    /// finished — computed once in `finishQuiz()`, before the new score
+    /// overwrites the stored best, so it can't be re-derived from
+    /// `bestScore` afterwards (that would also read true on a mere tie).
+    @Published private(set) var isNewHighScore = false
 
     private var queue: [Question] = []
     private var missedQuestions: [Question] = []
@@ -44,6 +49,7 @@ final class QuizViewModel: ObservableObject {
         firstPassTotal = questions.count
         repeatCorrect = 0
         isRepeatRound = false
+        isNewHighScore = false
         phase = .playing
         advanceToNextQuestion()
     }
@@ -100,7 +106,9 @@ final class QuizViewModel: ObservableObject {
     private func finishQuiz() {
         phase = .finished
         let key = highScoreKey(for: selectedCategory, difficulty: selectedDifficulty)
-        if firstPassCorrect > defaults.integer(forKey: key) {
+        let previousBest = defaults.integer(forKey: key)
+        isNewHighScore = firstPassCorrect > previousBest
+        if isNewHighScore {
             defaults.set(firstPassCorrect, forKey: key)
         }
     }

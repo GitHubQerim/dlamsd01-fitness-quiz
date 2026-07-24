@@ -9,62 +9,51 @@ struct ResultView: View {
         return "\(pct)%"
     }
 
-    private var isNewHighScore: Bool {
-        viewModel.firstPassCorrect > 0 && viewModel.firstPassCorrect >= viewModel.bestScore
-    }
-
     var body: some View {
-        ZStack(alignment: .top) {
-            DSColor.headerWash
-                .frame(height: 220)
-                .ignoresSafeArea(edges: .top)
+        DSWashedScreen {
+            VStack(spacing: DSSpacing.sectionGap) {
+                Text("Ergebnis")
+                    .font(DSFont.greeting)
+                    .foregroundColor(DSColor.textPrimary)
+                    .padding(.top, DSSpacing.s24)
 
-            ScrollView {
-                VStack(spacing: DSSpacing.sectionGap) {
-                    Text("Ergebnis")
-                        .font(DSFont.greeting)
-                        .foregroundColor(DSColor.textPrimary)
-                        .padding(.top, DSSpacing.s24)
-
-                    if isNewHighScore {
-                        Text("Neuer Bestwert!")
-                            .font(DSFont.label)
-                            .foregroundColor(DSColor.accent)
-                    }
-
-                    DSProgressRing(value: viewModel.firstPassCorrect, max: viewModel.firstPassTotal, label: percentageLabel)
-
-                    HStack(spacing: DSSpacing.cardGap) {
-                        DSStatTile(
-                            label: "Richtig",
-                            icon: "check",
-                            value: "\(viewModel.firstPassCorrect)/\(viewModel.firstPassTotal)",
-                            valueColor: DSColor.correct
-                        )
-                        DSStatTile(
-                            label: "Wiederholt gemeistert",
-                            icon: "rotate-ccw",
-                            value: "\(viewModel.repeatCorrect)"
-                        )
-                    }
-
-                    DSStatTile(
-                        label: "Bestwert (\(viewModel.selectedCategory.displayName))",
-                        icon: "chart-column",
-                        value: "\(viewModel.bestScore)/\(viewModel.firstPassTotal)"
-                    )
-
-                    VStack(spacing: DSSpacing.cardGap) {
-                        DSButton(title: "Nochmal", icon: "rotate-ccw", variant: .accent, size: .lg, fullWidth: true) {
-                            viewModel.startQuiz()
-                        }
-                        DSButton(title: "Zurück zum Start", icon: "house", variant: .outline, size: .lg, fullWidth: true) {
-                            viewModel.reset()
-                        }
-                    }
-                    .padding(.top, DSSpacing.s8)
+                if viewModel.isNewHighScore {
+                    Text("Neuer Bestwert!")
+                        .font(DSFont.label)
+                        .foregroundColor(DSColor.accent)
                 }
-                .padding(DSSpacing.screenGutter)
+
+                DSProgressRing(value: viewModel.firstPassCorrect, max: viewModel.firstPassTotal, label: percentageLabel)
+
+                HStack(spacing: DSSpacing.cardGap) {
+                    DSStatTile(
+                        label: "Richtig",
+                        icon: "check",
+                        value: "\(viewModel.firstPassCorrect)/\(viewModel.firstPassTotal)",
+                        valueColor: DSColor.correct
+                    )
+                    DSStatTile(
+                        label: "Wiederholt gemeistert",
+                        icon: "rotate-ccw",
+                        value: "\(viewModel.repeatCorrect)"
+                    )
+                }
+
+                DSStatTile(
+                    label: "Bestwert (\(viewModel.selectedCategory.displayName))",
+                    icon: "chart-column",
+                    value: "\(viewModel.bestScore)/\(viewModel.firstPassTotal)"
+                )
+
+                VStack(spacing: DSSpacing.cardGap) {
+                    DSButton(title: "Nochmal", icon: "rotate-ccw", variant: .accent, fullWidth: true) {
+                        viewModel.startQuiz()
+                    }
+                    DSButton(title: "Zurück zum Start", icon: "house", variant: .outline, fullWidth: true) {
+                        viewModel.reset()
+                    }
+                }
+                .padding(.top, DSSpacing.s8)
             }
         }
     }

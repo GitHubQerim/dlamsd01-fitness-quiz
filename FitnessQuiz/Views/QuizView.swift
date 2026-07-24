@@ -30,9 +30,8 @@ struct QuizView: View {
                 Spacer()
 
                 if viewModel.isAnswered {
-                    DSButton(title: "Weiter", variant: .accent, size: .lg, fullWidth: true) {
-                        viewModel.advanceToNextQuestion()
-                    }
+                    NextButton(action: viewModel.advanceToNextQuestion)
+                        .id(question.id)
                 }
             }
         }
@@ -52,48 +51,56 @@ struct QuizView: View {
         .padding(.top, DSSpacing.s24)
     }
 
+    /// Background/border for one answer row, derived once instead of two
+    /// separately-branching closures.
+    private func rowStyle(isCorrectAnswer: Bool, isSelected: Bool) -> (background: Color, border: Color) {
+        guard viewModel.isAnswered else { return (DSColor.surfaceCard, .clear) }
+        if isCorrectAnswer { return (DSColor.correct.opacity(0.25), DSColor.correct) }
+        if isSelected { return (DSColor.incorrect.opacity(0.25), DSColor.incorrect) }
+        return (DSColor.surfaceCard, .clear)
+    }
+
     private func answerRow(index: Int, text: String, question: Question) -> some View {
         let isSelected = viewModel.selectedAnswerIndex == index
         let isCorrectAnswer = index == question.correctAnswerIndex
-
-        let backgroundColor: Color = {
-            guard viewModel.isAnswered else { return DSColor.surfaceCard }
-            if isCorrectAnswer { return DSColor.correct.opacity(0.25) }
-            if isSelected { return DSColor.incorrect.opacity(0.25) }
-            return DSColor.surfaceCard
-        }()
-
-        let borderColor: Color = {
-            guard viewModel.isAnswered else { return .clear }
-            if isCorrectAnswer { return DSColor.correct }
-            if isSelected { return DSColor.incorrect }
-            return .clear
-        }()
+        let style = rowStyle(isCorrectAnswer: isCorrectAnswer, isSelected: isSelected)
 
         return Button {
             viewModel.submitAnswer(index)
         } label: {
-            HStack {
-                Text(text)
-                    .font(DSFont.body)
-                    .foregroundColor(DSColor.textPrimary)
-                    .multilineTextAlignment(.leading)
-                Spacer()
-                if viewModel.isAnswered && isCorrectAnswer {
-                    DSIcon(name: "check", size: 16)
-                        .foregroundColor(DSColor.correct)
+            DSCard(background: style.background, borderColor: style.border) {
+                HStack {
+                    Text(text)
+                        .font(DSFont.body)
+                        .foregroundColor(DSColor.textPrimary)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                    if viewModel.isAnswered && isCorrectAnswer {
+                        DSIcon(name: "check", size: 16)
+                            .foregroundColor(DSColor.correct)
+                    }
                 }
             }
-            .padding(DSSpacing.s12)
-            .frame(maxWidth: .infinity, minHeight: DSSpacing.tapMin, alignment: .leading)
-            .background(backgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: DSRadius.card, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: DSRadius.card, style: .continuous)
-                    .stroke(borderColor, lineWidth: 1.5)
-            )
+            .frame(minHeight: DSSpacing.tapMin)
         }
         .buttonStyle(DSPressable())
         .disabled(viewModel.isAnswered)
+    }
+}
+
+/// Wraps the "Weiter" action with a one-shot guard: `.id(question.id)` on
+/// the call site gives each question a fresh instance, so `hasAdvanced`
+/// blocks a rapid double-tap from calling `advanceToNextQuestion()` twice
+/// (which would silently skip a question) without needing a manual reset.
+private struct NextButton: View {
+    let action: () -> Void
+    @State private var hasAdvanced = false
+
+    var body: some View {
+        DSButton(title: "Weiter", variant: .accent, fullWidth: true) {
+            guard !hasAdvanced else { return }
+            hasAdvanced = true
+            action()
+        }
     }
 }

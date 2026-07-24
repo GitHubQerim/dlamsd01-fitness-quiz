@@ -8,33 +8,26 @@ struct StartView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .top) {
-            DSColor.headerWash
-                .frame(height: 220)
-                .ignoresSafeArea(edges: .top)
+        DSWashedScreen {
+            VStack(alignment: .leading, spacing: DSSpacing.sectionGap) {
+                header
 
-            ScrollView {
-                VStack(alignment: .leading, spacing: DSSpacing.sectionGap) {
-                    header
+                sectionLabel("Kategorie")
+                categoryPicker
 
-                    sectionLabel("Kategorie")
-                    categoryPicker
+                sectionLabel("Schwierigkeit")
+                difficultyPicker
 
-                    sectionLabel("Schwierigkeit")
-                    difficultyPicker
+                DSStatTile(
+                    label: "Bestwert",
+                    icon: "chart-column",
+                    value: "\(viewModel.bestScore)/\(totalQuestions)"
+                )
 
-                    DSStatTile(
-                        label: "Bestwert",
-                        icon: "chart-column",
-                        value: "\(viewModel.bestScore)/\(totalQuestions)"
-                    )
-
-                    DSButton(title: "Quiz starten", icon: "dumbbell", variant: .accent, size: .lg, fullWidth: true) {
-                        viewModel.startQuiz()
-                    }
-                    .padding(.top, DSSpacing.s8)
+                DSButton(title: "Quiz starten", icon: "dumbbell", variant: .accent, fullWidth: true) {
+                    viewModel.startQuiz()
                 }
-                .padding(DSSpacing.screenGutter)
+                .padding(.top, DSSpacing.s8)
             }
         }
     }

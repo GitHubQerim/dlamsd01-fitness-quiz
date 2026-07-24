@@ -4,8 +4,8 @@ import SwiftUI
 struct DSProgressRing: View {
     let value: Int
     let max: Int
-    var size: CGFloat = 96
-    var thickness: CGFloat = 8
+    var size: CGFloat = 128
+    var thickness: CGFloat = 10
     var label: String
 
     private var progress: Double {
@@ -22,7 +22,7 @@ struct DSProgressRing: View {
                 .rotationEffect(.degrees(-90))
                 .animation(DSMotion.base, value: progress)
             Text(label)
-                .font(DSFont.metric)
+                .font(DSFont.score)
                 .foregroundColor(progress >= 1 ? DSColor.accent : DSColor.textSecondary)
         }
         .frame(width: size, height: size)

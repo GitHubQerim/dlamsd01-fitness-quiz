@@ -1,29 +1,26 @@
 import SwiftUI
 
-/// Surface adapted from `components/core/Card.jsx`: flat fill, no border,
-/// no shadow — depth in this system comes from a stepped surface value,
-/// not elevation.
-enum DSCardTone {
-    case card, inset
-
-    var background: Color {
-        switch self {
-        case .card: return DSColor.surfaceCard
-        case .inset: return DSColor.surfaceInset
-        }
-    }
-}
-
+/// Surface adapted from `components/core/Card.jsx`: flat fill, no shadow —
+/// depth in this system comes from a stepped surface value, not elevation.
+/// The source component also has an "inset" tone for nested containers;
+/// this app never nests cards, so it's trimmed to the one tone it uses.
+/// An optional border is exposed for the quiz screen's selected/correct/
+/// incorrect answer highlight, reusing this shape instead of redeclaring it.
 struct DSCard<Content: View>: View {
-    var tone: DSCardTone = .card
     var padding: CGFloat = DSSpacing.s12
+    var background: Color = DSColor.surfaceCard
+    var borderColor: Color = .clear
     @ViewBuilder var content: Content
 
     var body: some View {
         content
             .padding(padding)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(tone.background)
+            .background(background)
             .clipShape(RoundedRectangle(cornerRadius: DSRadius.card, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: DSRadius.card, style: .continuous)
+                    .stroke(borderColor, lineWidth: 1.5)
+            )
     }
 }

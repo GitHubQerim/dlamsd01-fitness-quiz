@@ -1,24 +1,18 @@
 import SwiftUI
 
-/// Button adapted from `components/core/Button.jsx`.
+/// Button adapted from `components/core/Button.jsx`. The source component
+/// has more variants/sizes (light/ghost, sm/md) than this 3-screen quiz
+/// app uses — trimmed to just the two variants and one size this app
+/// actually renders, per YAGNI.
 enum DSButtonVariant {
-    case accent, light, outline, ghost
+    case accent, outline
 
     var background: Color {
-        switch self {
-        case .accent: return DSColor.accent
-        case .light: return DSColor.nWhite
-        case .outline, .ghost: return .clear
-        }
+        self == .accent ? DSColor.accent : .clear
     }
 
     var foreground: Color {
-        switch self {
-        case .accent: return DSColor.textOnInvert
-        case .light: return DSColor.textOnInvert
-        case .outline: return DSColor.textPrimary
-        case .ghost: return DSColor.textTertiary
-        }
+        self == .accent ? DSColor.textOnInvert : DSColor.textPrimary
     }
 
     var border: Color? {
@@ -26,52 +20,29 @@ enum DSButtonVariant {
     }
 }
 
-enum DSButtonSize {
-    case md, lg
-
-    var height: CGFloat {
-        switch self {
-        case .md: return 34
-        case .lg: return 52
-        }
-    }
-
-    var horizontalPadding: CGFloat {
-        switch self {
-        case .md: return 14
-        case .lg: return 20
-        }
-    }
-
-    var font: Font {
-        switch self {
-        case .md: return DSFont.label
-        case .lg: return DSFont.body
-        }
-    }
-}
-
 struct DSButton: View {
+    private static let height: CGFloat = 52
+    private static let horizontalPadding: CGFloat = 20
+
     let title: String
     var icon: String? = nil
-    var variant: DSButtonVariant = .light
-    var size: DSButtonSize = .md
+    var variant: DSButtonVariant = .accent
     var fullWidth: Bool = false
     var action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 if let icon {
-                    DSIcon(name: icon, size: size == .lg ? 18 : 14)
+                    DSIcon(name: icon, size: 18)
                 }
                 Text(title)
-                    .font(size.font)
+                    .font(DSFont.body)
             }
             .foregroundColor(variant.foreground)
             .frame(maxWidth: fullWidth ? .infinity : nil)
-            .frame(minHeight: size.height)
-            .padding(.horizontal, size.horizontalPadding)
+            .frame(minHeight: Self.height)
+            .padding(.horizontal, Self.horizontalPadding)
             .background(variant.background)
             .clipShape(Capsule())
             .overlay(
