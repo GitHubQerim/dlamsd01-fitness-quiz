@@ -1,0 +1,40 @@
+name: FitnessQuiz
+options:
+  bundleIdPrefix: com.qerim.dlamsd01
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+targets:
+  FitnessQuiz:
+    type: application
+    platform: iOS
+    sources:
+      - path: FitnessQuiz
+        excludes:
+          - "Resources/Fonts/README.md"
+    resources:
+      - path: FitnessQuiz/Resources/Fonts
+      - path: FitnessQuiz/Assets.xcassets
+    info:
+      path: FitnessQuiz/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIAppFonts:
+          - Manrope-Regular.ttf
+          - Manrope-Medium.ttf
+          - Manrope-SemiBold.ttf
+          - Manrope-Bold.ttf
+          - Manrope-ExtraBold.ttf
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.qerim.dlamsd01.fitnessquiz
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1"
