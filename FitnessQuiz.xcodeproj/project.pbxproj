@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		02EBFEC7E7B1218C1004C416 /* DSChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DDE28423F3B193FA6BFE64 /* DSChip.swift */; };
 		02F696014CE178F8CD64BFF2 /* DSStatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF3F534A055604245F2DEC /* DSStatTile.swift */; };
+		0DD62F96B17DEBAD1D3AFAA0 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD4EC571DE52B4A9FF1BCE /* ResultView.swift */; };
 		34B1681272AABE4A2B56AB8D /* DSIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E392033048A1D3DCB0552899 /* DSIcon.swift */; };
 		446BBDA23A8FBA26950C22E4 /* DSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDFFDAE0E192F9759DEC08 /* DSButton.swift */; };
 		4E8761E7E6AADC3ED78F6771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF209595118219563BB6645 /* ContentView.swift */; };
+		6B976EA6EC1E621FE6E5773F /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325EED980A3D0AAECFCEA2BC /* QuizView.swift */; };
 		6FACD63E237FA73F6D96C91B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42094C32AE53B999C8B10482 /* Assets.xcassets */; };
 		837484B22F542D9505197D96 /* QuizCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6125398C5EC16E10616FC0 /* QuizCategory.swift */; };
 		8F77602B5D8843DECB2D3A58 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429FEA7CEF5FD9691E993E97 /* Spacing.swift */; };
@@ -26,15 +28,18 @@
 		D325AD03E0F8261AC9134665 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA58718D5136E1413CD16BF /* Difficulty.swift */; };
 		EDE34F27BC3E74CBE84DDBC7 /* DSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519FF7A9BAF250FD8D92E6F3 /* DSCard.swift */; };
 		EDF82353D362326E65B63D1E /* DSProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591D3CDFBBD395995B4BBDDF /* DSProgressRing.swift */; };
+		F0125452736B962255764A81 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086489C9994D13FDC3DAF14A /* StartView.swift */; };
 		F0F820FB86A89BEAF815659D /* Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2C005F4FF8C27DEFEAF7CF /* Motion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		03EB2F04919CF0B7F5A42467 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
+		086489C9994D13FDC3DAF14A /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		0FA58718D5136E1413CD16BF /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		1A6125398C5EC16E10616FC0 /* QuizCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCategory.swift; sourceTree = "<group>"; };
 		1C2C005F4FF8C27DEFEAF7CF /* Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motion.swift; sourceTree = "<group>"; };
 		2C6FB0F7AA6CF241D6388280 /* FitnessQuiz.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = FitnessQuiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		325EED980A3D0AAECFCEA2BC /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		38D7870085E25965258860EE /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		42094C32AE53B999C8B10482 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		429FEA7CEF5FD9691E993E97 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -49,6 +54,7 @@
 		9B7C80963B02AE16AF387A2B /* QuestionBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBank.swift; sourceTree = "<group>"; };
 		C0AF3F534A055604245F2DEC /* DSStatTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSStatTile.swift; sourceTree = "<group>"; };
 		DD89D7BBC440AE86ABCEF053 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		E0CD4EC571DE52B4A9FF1BCE /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		E392033048A1D3DCB0552899 /* DSIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSIcon.swift; sourceTree = "<group>"; };
 		F373701A8B8199BD510C2C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F64E05ADB2059A48B9182061 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
@@ -143,8 +149,19 @@
 				755CAB915CAFE66A7458A70D /* Models */,
 				2685ACC49A4776C4909F542E /* Resources */,
 				16AD2A0C0179933B89D5B574 /* ViewModels */,
+				E7ED51E5D1CB8260890A5681 /* Views */,
 			);
 			path = FitnessQuiz;
+			sourceTree = "<group>";
+		};
+		E7ED51E5D1CB8260890A5681 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				325EED980A3D0AAECFCEA2BC /* QuizView.swift */,
+				E0CD4EC571DE52B4A9FF1BCE /* ResultView.swift */,
+				086489C9994D13FDC3DAF14A /* StartView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,9 +250,12 @@
 				BD599FAAFE1CEA9A65FEC679 /* Question.swift in Sources */,
 				C79E5BB7DF5C6FCC205E16FE /* QuestionBank.swift in Sources */,
 				837484B22F542D9505197D96 /* QuizCategory.swift in Sources */,
+				6B976EA6EC1E621FE6E5773F /* QuizView.swift in Sources */,
 				C2CB98011572E26BA8533AB6 /* QuizViewModel.swift in Sources */,
 				B8C2954ACE3EF66B763E25E5 /* Radius.swift in Sources */,
+				0DD62F96B17DEBAD1D3AFAA0 /* ResultView.swift in Sources */,
 				8F77602B5D8843DECB2D3A58 /* Spacing.swift in Sources */,
+				F0125452736B962255764A81 /* StartView.swift in Sources */,
 				A26A42049F5A8F7535EC948A /* Typography.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
