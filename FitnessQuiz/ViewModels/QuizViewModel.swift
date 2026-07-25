@@ -42,7 +42,12 @@ final class QuizViewModel: ObservableObject {
     }
 
     func startQuiz() {
-        let questions = QuestionBank.questions(for: selectedCategory, difficulty: selectedDifficulty).shuffled()
+        // Shuffle question order AND each question's own answer order —
+        // the catalog authors the correct answer first for readability, so
+        // without the per-question shuffle it would always land on index 0.
+        let questions = QuestionBank.questions(for: selectedCategory, difficulty: selectedDifficulty)
+            .shuffled()
+            .map { $0.shuffled() }
         queue = questions
         missedQuestions = []
         firstPassCorrect = 0
