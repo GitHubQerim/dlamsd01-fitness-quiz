@@ -2,6 +2,7 @@ import SwiftUI
 
 struct StartView: View {
     @ObservedObject var viewModel: QuizViewModel
+    @State private var showingLexikon = false
 
     private var totalQuestions: Int {
         QuestionBank.questions(for: viewModel.selectedCategory, difficulty: viewModel.selectedDifficulty).count
@@ -11,6 +12,10 @@ struct StartView: View {
         DSWashedScreen {
             VStack(alignment: .leading, spacing: DSSpacing.sectionGap) {
                 header
+
+                DSButton(title: "Lexikon", icon: "info", variant: .outline) {
+                    showingLexikon = true
+                }
 
                 sectionLabel("Kategorie")
                 categoryPicker
@@ -29,6 +34,9 @@ struct StartView: View {
                 }
                 .padding(.top, DSSpacing.s8)
             }
+        }
+        .sheet(isPresented: $showingLexikon) {
+            LexikonView()
         }
     }
 
