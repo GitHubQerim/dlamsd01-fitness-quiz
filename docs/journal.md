@@ -31,3 +31,13 @@ Kriterium: [qualität, prozess]
 - Aufgeräumt: Kategorie-/Bericht-Header-Wash war in StartView und ResultView dupliziert (→ `DSWashedScreen`), `QuizView`s Antwort-Kacheln bauten `DSCard`s Form doppelt nach (→ `DSCard` um `background`/`borderColor` erweitert), nie genutzte Varianten (`DSButtonVariant.light/.ghost`, `DSButtonSize.md`, `DSCardTone.inset`) entfernt (YAGNI), `DSFont.score` war deklariert aber nirgends verdrahtet (jetzt im Ergebnis-Ring verwendet).
 - Ergänzt: VoiceOver-`.isSelected`-Trait auf den Auswahl-Chips (fehlte komplett).
 - Verifiziert: Alle Fixes per Simulator-Screenshot geprüft, inkl. eines automatisierten Voll-Durchlaufs (Start → Wiederholungsrunde → Ergebnis) über einen temporären Debug-Hook, der danach wieder entfernt wurde – bestätigt u.a., dass der Gleichstand-Fall jetzt korrekt keinen "Neuer Bestwert!"-Banner mehr zeigt.
+
+## 2026-07-25 14:30 – Playtest-Feedback: Antworten waren erratbar
+Tags: [problem, entscheidung, session]
+Kriterium: [qualität, prozess]
+
+- Was: Beim ersten echten Durchspielen (nach Freiräumen von Speicherplatz – die App war zuvor wegen vollem Datenträger nicht startbar) fiel auf: die richtige Antwort stand fast immer an erster Stelle und war oft die längere/vollständigere Formulierung.
+- Ursache: Beim Schreiben der 45 Fragen wurde die richtige Antwort aus Lesbarkeitsgründen immer zuerst notiert (`correctAnswerIndex: 0` bei 38 von 45 Fragen = 84%) und oft als vollständiger Satz, während Distraktoren knapp gehalten wurden.
+- Lösung: `Question.shuffled()` mischt die Antwortreihenfolge zur Laufzeit und mappt `correctAnswerIndex` neu; `QuizViewModel.startQuiz()` wendet das auf jede Frage der Runde an. Zusätzlich wurden bei ~15 Fragen die Distraktoren umformuliert, damit auch die Antwortlänge kein verlässliches Muster mehr ist.
+- Verifiziert: Direkter Logik-Check über einen temporären Debug-Hook (300 simulierte Runden, immer Antwort-Index 0 gewählt) – vorher deterministisch 4/5 richtig durch das Muster, nachher variiert der Score zufällig zwischen den Läufen, wie bei echtem Raten erwartet.
+- Reflexion: Ein Playtest durch eine echte Person (statt nur automatisierter Build-/Logik-Checks) hat ein Qualitätsproblem aufgedeckt, das kein Unit-Test oder Code-Review von selbst gefunden hätte, da der Code technisch korrekt war – nur die Dateninhalte waren einseitig strukturiert.
