@@ -8,7 +8,7 @@ import SwiftUI
 /// incorrect answer highlight, reusing this shape instead of redeclaring it.
 struct DSCard<Content: View>: View {
     var padding: CGFloat = DSSpacing.s12
-    var background: Color = DSColor.surfaceCard
+    var background: AnyShapeStyle = AnyShapeStyle(DSColor.surfaceCard)
     var borderColor: Color = .clear
     @ViewBuilder var content: Content
 

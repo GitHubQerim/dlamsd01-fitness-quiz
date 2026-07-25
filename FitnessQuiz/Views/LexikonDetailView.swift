@@ -9,7 +9,7 @@ struct LexikonDetailView: View {
             VStack(alignment: .leading, spacing: DSSpacing.sectionGap) {
                 header
 
-                DSCard {
+                DSCard(background: AnyShapeStyle(detailsGradient)) {
                     Text(entry.details)
                         .font(DSFont.body)
                         .foregroundColor(DSColor.textSecondary)
@@ -22,6 +22,12 @@ struct LexikonDetailView: View {
             }
         }
         .preferredColorScheme(.dark)
+    }
+
+    /// The details card fades from the standard card surface down to pure
+    /// black, echoing the header wash's top-to-base fade elsewhere in the app.
+    private var detailsGradient: LinearGradient {
+        LinearGradient(colors: [DSColor.surfaceCard, DSColor.n0], startPoint: .top, endPoint: .bottom)
     }
 
     private var header: some View {

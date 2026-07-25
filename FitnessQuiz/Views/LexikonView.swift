@@ -9,6 +9,12 @@ struct LexikonView: View {
     @State private var selectedCategory: QuizCategory?
     @Environment(\.dismiss) private var dismiss
 
+    /// Pre-filters the browser to one category, e.g. when opened from the
+    /// result screen for the category just played.
+    init(initialCategory: QuizCategory? = nil) {
+        _selectedCategory = State(initialValue: initialCategory)
+    }
+
     private var groupedEntries: [(priority: ContentPriority, entries: [LexikonEntry])] {
         ContentPriority.allCases.compactMap { priority in
             let entries = LexikonBank.all.filter {
