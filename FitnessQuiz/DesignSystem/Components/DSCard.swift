@@ -8,14 +8,18 @@ import SwiftUI
 /// incorrect answer highlight, reusing this shape instead of redeclaring it.
 struct DSCard<Content: View>: View {
     var padding: CGFloat = DSSpacing.s12
-    var background: AnyShapeStyle = AnyShapeStyle(DSColor.surfaceCard)
+    /// Set to make same-row cards match height (e.g. the dashboard's
+    /// Lexikon/about tiles) — applied before the background so the fill
+    /// actually reaches that height instead of being centered inside it.
+    var minHeight: CGFloat? = nil
+    var background: Color = DSColor.surfaceCard
     var borderColor: Color = .clear
     @ViewBuilder var content: Content
 
     var body: some View {
         content
             .padding(padding)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, minHeight: minHeight, alignment: .topLeading)
             .background(background)
             .clipShape(RoundedRectangle(cornerRadius: DSRadius.card, style: .continuous))
             .overlay(

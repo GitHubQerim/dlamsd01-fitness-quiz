@@ -30,8 +30,12 @@ struct LexikonView: View {
                 VStack(alignment: .leading, spacing: DSSpacing.sectionGap) {
                     header
                     categoryFilter
-                    ForEach(groupedEntries, id: \.priority) { group in
-                        sectionView(priority: group.priority, entries: group.entries)
+                    if groupedEntries.isEmpty {
+                        emptyState
+                    } else {
+                        ForEach(groupedEntries, id: \.priority) { group in
+                            sectionView(priority: group.priority, entries: group.entries)
+                        }
                     }
                 }
             }
@@ -74,6 +78,13 @@ struct LexikonView: View {
                 }
             }
         }
+    }
+
+    private var emptyState: some View {
+        Text("Für diese Kategorie sind noch keine Einträge vorhanden.")
+            .font(DSFont.body)
+            .foregroundColor(DSColor.textSecondary)
+            .padding(.top, DSSpacing.sectionGap)
     }
 
     private func sectionView(priority: ContentPriority, entries: [LexikonEntry]) -> some View {

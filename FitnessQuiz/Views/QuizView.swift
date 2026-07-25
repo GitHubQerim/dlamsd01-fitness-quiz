@@ -80,7 +80,7 @@ struct QuizView: View {
         return Button {
             viewModel.submitAnswer(index)
         } label: {
-            DSCard(background: AnyShapeStyle(style.background), borderColor: style.border) {
+            DSCard(background: style.background, borderColor: style.border) {
                 HStack {
                     Text(text)
                         .font(DSFont.body)
