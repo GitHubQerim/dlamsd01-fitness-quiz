@@ -18,7 +18,7 @@ enum ContentPriority: Int, Comparable, CaseIterable {
     }
 }
 
-struct LexikonEntry: Identifiable {
+struct LexikonEntry: Identifiable, Hashable {
     let id: String
     let title: String
     let category: QuizCategory
