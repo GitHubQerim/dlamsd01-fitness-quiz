@@ -95,6 +95,7 @@ struct LexikonView: View {
                     Text(entry.summary)
                         .font(DSFont.caption)
                         .foregroundColor(DSColor.textSecondary)
+                        .multilineTextAlignment(.leading)
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
