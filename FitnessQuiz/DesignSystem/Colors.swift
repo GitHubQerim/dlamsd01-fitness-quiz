@@ -59,8 +59,10 @@ enum DSColor {
     static let borderStrong = Color.white.opacity(0.12)
 
     /// Top-anchored teal wash behind screen headers — the system's only gradient.
+    /// Two stops (not several intermediate greens) so the fade to black reads
+    /// as one smooth, even transition instead of visible banding.
     static let headerWash = LinearGradient(
-        colors: [green900, Color(hex: 0x123a33), Color(hex: 0x0f2825), surfaceBase],
+        colors: [green900, surfaceBase],
         startPoint: .top,
         endPoint: .bottom
     )

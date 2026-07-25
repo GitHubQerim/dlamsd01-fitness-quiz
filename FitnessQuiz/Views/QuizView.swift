@@ -2,40 +2,52 @@ import SwiftUI
 
 struct QuizView: View {
     @ObservedObject var viewModel: QuizViewModel
+    @State private var lexikonEntryToShow: LexikonEntry?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: DSSpacing.sectionGap) {
+        VStack(alignment: .leading, spacing: 0) {
             progressHeader
+                .padding(.horizontal, DSSpacing.screenGutter)
 
             if let question = viewModel.currentQuestion {
-                DSCard {
-                    VStack(alignment: .leading, spacing: DSSpacing.stackGap) {
-                        if viewModel.isRepeatRound {
-                            Text("WIEDERHOLUNG")
-                                .font(DSFont.micro)
-                                .foregroundColor(DSColor.accent)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: DSSpacing.sectionGap) {
+                        DSCard {
+                            VStack(alignment: .leading, spacing: DSSpacing.stackGap) {
+                                if viewModel.isRepeatRound {
+                                    Text("WIEDERHOLUNG")
+                                        .font(DSFont.micro)
+                                        .foregroundColor(DSColor.accent)
+                                }
+                                Text(question.text)
+                                    .font(DSFont.question)
+                                    .foregroundColor(DSColor.textPrimary)
+                            }
                         }
-                        Text(question.text)
-                            .font(DSFont.question)
-                            .foregroundColor(DSColor.textPrimary)
-                    }
-                }
 
-                VStack(spacing: DSSpacing.cardGap) {
-                    ForEach(Array(question.answers.enumerated()), id: \.offset) { index, answer in
-                        answerRow(index: index, text: answer, question: question)
-                    }
-                }
+                        VStack(spacing: DSSpacing.cardGap) {
+                            ForEach(Array(question.answers.enumerated()), id: \.offset) { index, answer in
+                                answerRow(index: index, text: answer, question: question)
+                            }
+                        }
 
-                Spacer()
+                        if viewModel.isAnswered {
+                            explanation(for: question)
+                        }
+                    }
+                    .padding(DSSpacing.screenGutter)
+                }
 
                 if viewModel.isAnswered {
                     NextButton(action: viewModel.advanceToNextQuestion)
                         .id(question.id)
+                        .padding(DSSpacing.screenGutter)
                 }
             }
         }
-        .padding(DSSpacing.screenGutter)
+        .sheet(item: $lexikonEntryToShow) { entry in
+            LexikonDetailView(entry: entry)
+        }
     }
 
     private var progressHeader: some View {
@@ -85,6 +97,33 @@ struct QuizView: View {
         }
         .buttonStyle(DSPressable())
         .disabled(viewModel.isAnswered)
+    }
+
+    /// Explanation shown once a question is answered, plus an optional
+    /// link into the Lexikon for questions that have a related term.
+    private func explanation(for question: Question) -> some View {
+        VStack(alignment: .leading, spacing: DSSpacing.stackGap) {
+            DSCard {
+                VStack(alignment: .leading, spacing: DSSpacing.stackGap) {
+                    HStack(spacing: 5) {
+                        DSIcon(name: "info", size: 13)
+                        Text("ERKLÄRUNG")
+                            .font(DSFont.micro)
+                    }
+                    .foregroundColor(DSColor.textTertiary)
+
+                    Text(question.explanation)
+                        .font(DSFont.body)
+                        .foregroundColor(DSColor.textSecondary)
+                }
+            }
+
+            if let entry = LexikonBank.entry(for: question.relatedTermSlug) {
+                DSButton(title: "Mehr erfahren →", variant: .outline) {
+                    lexikonEntryToShow = entry
+                }
+            }
+        }
     }
 }
 

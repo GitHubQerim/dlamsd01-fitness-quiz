@@ -41,3 +41,45 @@ Kriterium: [qualität, prozess]
 - Lösung: `Question.shuffled()` mischt die Antwortreihenfolge zur Laufzeit und mappt `correctAnswerIndex` neu; `QuizViewModel.startQuiz()` wendet das auf jede Frage der Runde an. Zusätzlich wurden bei ~15 Fragen die Distraktoren umformuliert, damit auch die Antwortlänge kein verlässliches Muster mehr ist.
 - Verifiziert: Direkter Logik-Check über einen temporären Debug-Hook (300 simulierte Runden, immer Antwort-Index 0 gewählt) – vorher deterministisch 4/5 richtig durch das Muster, nachher variiert der Score zufällig zwischen den Läufen, wie bei echtem Raten erwartet.
 - Reflexion: Ein Playtest durch eine echte Person (statt nur automatisierter Build-/Logik-Checks) hat ein Qualitätsproblem aufgedeckt, das kein Unit-Test oder Code-Review von selbst gefunden hätte, da der Code technisch korrekt war – nur die Dateninhalte waren einseitig strukturiert.
+
+## 2026-07-25 15:00 – Feature: Erklärungen im Quiz + Lexikon-Screen
+Tags: [feature, entscheidung, ressource, session]
+Kriterium: [transfer, kreativität, qualität]
+
+- Was: Auf Nutzerwunsch ergänzt: (1) jede Frage bekommt eine kurze Erklärung, die nach dem Beantworten angezeigt wird, (2) ein eigener Lexikon-Screen zum Nachlesen von Ernährungsgrundlagen, (3) Verlinkung von passenden Quizfragen zum jeweiligen Lexikon-Eintrag ("Mehr erfahren").
+- Entscheidung – Content-Priorisierung nach MoSCoW: Die 11 Lexikon-Einträge sind explizit als Lern-Fahrplan sortiert, nicht alphabetisch. *Must* (Fundamentals, zuerst lernen): Kalorienbilanz, Makronährstoffe, Proteinbedarf. *Should* (Vertiefung): Mikronährstoffe, Aminosäuren, glykämischer Index, Nährstofftiming. *Could* (Extras): Creatin, Thermic Effect of Food, Leucin-Schwelle, Insulin. Begründung: für jemanden, der sich Ernährungswissen neu aneignet, ist die Reihenfolge wichtiger als Vollständigkeit – erst die Kalorienbilanz verstehen, dann Details.
+- Entscheidung – Quellen: allgemeine, etablierte Sporternährungs-Grundlagen (u.a. Positionspapiere der International Society of Sports Nutrition, Standardlehrbücher) als Sammelquelle im Literaturverzeichnis, kein Beleg pro Einzelfakt – passt zu unstrittigem, breit anerkanntem Wissen (keine Aussagen zu kontroverser/neuer Forschung).
+- Entscheidung – Navigation: bewusst per `.sheet` statt eines neuen App-weiten `NavigationStack` gelöst (Lexikon-Liste hat einen eigenen internen NavigationStack für Liste→Detail). Das ist genau die Grenze des Phasen-Switch-Ansatzes, die beim Code-Review schon als möglicher künftiger Bedarf benannt wurde – hier gezielt mit der leichtgewichtigeren Lösung (Sheets) statt eines großen Navigations-Refactorings adressiert.
+- Reflexion: Das Feature macht die App zu einem echten Lerntool statt reinem Abfrage-Tool – direkt relevant für die Bewertungskriterien Qualität ("hilft die App tatsächlich, die Aufgabe zu lösen?") und Kreativität.
+
+## 2026-07-25 16:15 – Dashboard-Redesign des Start-Screens
+Tags: [feature, entscheidung, session]
+Kriterium: [kreativität, qualität]
+
+- Was: Auf Vorschlag des Nutzers `StartView` von einer linearen Liste (Header, Lexikon-Button, Chips, Bestwert, Start-Button untereinander) zu einem Karten-Dashboard umgebaut: eine Full-Width-Karte "Quiz" (Kategorie/Schwierigkeit/Bestwert/Start-Button gebündelt) und darunter eine Zeile mit zwei halbbreiten Karten ("Lexikon", "Über dieses Projekt").
+- Entscheidung: Layout lehnt sich bewusst an das Karten-Raster des ursprünglichen GreenDarkFitness-Dashboards an (Metric-Tiles im 2-Spalten-Grid) – gute Konsistenz zur Design-System-Quelle, obwohl unsere Quiz-App kein Dashboard im ursprünglichen (Fitness-Tracker-)Sinn hat.
+- Ressource: zusätzliches Lucide-Icon "heart-pulse" aus dem Design-Projekt für die "Über dieses Projekt"-Karte ergänzt (gleiches Vorgehen wie bei den bisherigen 7 Icons: SVG kopieren, Template-Rendering aktivieren).
+
+## 2026-07-25 16:20 – Lexikon-Inhaltslücke geschlossen
+Tags: [problem, feature, session]
+Kriterium: [qualität, transfer]
+
+- Problem: Beim Testen fiel auf, dass das Lexikon nur Ernährungsthemen abdeckte – ein Filter auf Trainingslehre oder Übungsausführung zeigte eine leere, unerklärte Fläche.
+- Lösung: 14 neue Einträge nach demselben MoSCoW-Schema ergänzt (7 Trainingslehre: progressive Überlastung, Trainingsvolumen, Satz & Wiederholung, Periodisierung, RPE & RIR, Superkompensation, Overtraining; 7 Übungsausführung: neutrale Wirbelsäule, Range of Motion, Aufwärmen, exzentrisch/konzentrisch, Kreuzheben-Technik, Sticking Point, Bracing). Zusätzlich ein Empty-State-Text als Fallback, falls eine Kategorie/Filter-Kombination doch mal leer sein sollte.
+
+## 2026-07-25 17:00 – Polish-Runde: drei kleine, aber lehrreiche UI-Bugs
+Tags: [problem, entscheidung, session]
+Kriterium: [qualität, prozess]
+
+- Problem 1 (sichtbare Naht im Verlauf): Der Header-Wash zeigte im Lexikon (als eigenständiges Sheet präsentiert) eine sichtbare Kante dort, wo der 220pt-Verlauf endet. Ursache: `DSWashedScreen` hatte selbst keinen vollflächigen Hintergrund und verließ sich auf den Hintergrund der umgebenden View – das funktioniert bei StartView/ResultView (weil `ContentView` schon `surfaceBase` vollflächig malt), aber nicht bei einem eigenständig präsentierten Sheet, das seinen eigenen System-Hintergrund mitbringt. Lösung: `DSWashedScreen` malt jetzt selbst zuerst `surfaceBase` vollflächig, dann den Verlauf darüber.
+- Problem 2 (Karten-Höhe): Die zwei Dashboard-Kacheln sollten exakt gleich hoch sein, unabhängig vom Textinhalt und der Systemschriftgröße. Eine feste `minHeight`-Konstante reichte nicht (bei unterschiedlich langem Text wächst nur eine Karte, die andere bleibt kürzer). Lösung: `PreferenceKey`-basierte Höhen-Messung (`DashboardTileHeightKey`, `reduce` nimmt das Maximum) – beide Karten melden ihre natürliche Höhe, die größere gewinnt, beide bekommen diesen Wert als `minHeight` zurück. Klassisches SwiftUI-Muster zum Höhen-Angleichen von Geschwister-Views ohne gemeinsamen Elternknoten mit fester Größe. Bei der größtmöglichen Bedienungshilfen-Schriftgröße bleibt in der kürzeren Karte sichtbarer Leerraum – bewusst akzeptierter Kompromiss (Leerraum statt abgeschnittenem Text).
+- Problem 3 (fehlendes App-Icon): Nur ein leerer Icon-Slot war hinterlegt. Lösung: Icon programmatisch mit CoreGraphics erzeugt (Marken-Hintergrund + Mint-Kurzhantel-Silhouette aus einfachen Rechtecken/Rundungen). Wichtig dabei: kein Alpha-Kanal (`CGImageAlphaInfo.noneSkipLast`), sonst schlägt Apples Icon-Validierung fehl.
+- Problem 4 (Absturz auf echtem Gerät): App stürzte beim Start auf einem echten iPhone ab (im Simulator lief sie einwandfrei), Xcode zeigte nur einen nicht aussagekräftigen Low-Level-Trap ohne Swift-Stackframe. Wahrscheinliche Ursache: `DEVELOPMENT_TEAM` in `project.yml` ist leer – für den Simulator unproblematisch, für Code-Signing auf einem echten Gerät aber nötig. Nutzer gebeten, in Xcode unter "Signing & Capabilities" sein Team auszuwählen; im Simulator weiterverifiziert, während das offen ist.
+- Kleinere Anpassung: Begrüßungstext und Titel im Dashboard-Header vergrößert (`DSFont.body` bzw. `DSFont.score` statt `label`/`greeting`), damit der Screen wirklich wie ein Dashboard-Header wirkt statt wie eine einfache Listen-Überschrift.
+
+## 2026-07-25 17:15 – Anforderungs-Check gegen die Aufgabenstellung
+Tags: [entscheidung, session]
+Kriterium: [prozess, qualität]
+
+- Was: Vor dem ersten Commit des Gesamtstands systematisch gegen die Aufgabenstellung DLAMSD01/1.1 geprüft: eigenes Anwendungsgebiet, Prototyp, begründete Funktionsentscheidungen, übersichtlicher Code mit Funktionen/geeigneten Datenstrukturen, Einhaltung der Swift-API-Design-Guidelines, dokumentierbare Verknüpfung von Nutzerinteraktion und Programmreaktion, Screenshot-Fähigkeit.
+- Ergebnis: Code-seitig sind alle Pflichtanforderungen erfüllt. Die einzig verbleibende große Aufgabe ist der Projektbericht selbst (noch nicht begonnen). Der Funktionsumfang (Erklärungen, Lexikon, Dashboard) geht bewusst über das geforderte Minimum hinaus – gutes Material für die Bewertungskriterien Kreativität und Qualität im Bericht.
