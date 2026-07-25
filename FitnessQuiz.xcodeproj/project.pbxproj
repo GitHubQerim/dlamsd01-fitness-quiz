@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01A9931711A3965A2392918B /* LexikonBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D0FEFF55F96003F09356A0 /* LexikonBank.swift */; };
 		02EBFEC7E7B1218C1004C416 /* DSChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DDE28423F3B193FA6BFE64 /* DSChip.swift */; };
 		02F696014CE178F8CD64BFF2 /* DSStatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF3F534A055604245F2DEC /* DSStatTile.swift */; };
 		0DD62F96B17DEBAD1D3AFAA0 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CD4EC571DE52B4A9FF1BCE /* ResultView.swift */; };
 		34B1681272AABE4A2B56AB8D /* DSIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E392033048A1D3DCB0552899 /* DSIcon.swift */; };
+		3EAAEF6582AF454052771F78 /* LexikonEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57677A3F09A15DA5B7568025 /* LexikonEntry.swift */; };
 		446BBDA23A8FBA26950C22E4 /* DSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDFFDAE0E192F9759DEC08 /* DSButton.swift */; };
 		4E8761E7E6AADC3ED78F6771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF209595118219563BB6645 /* ContentView.swift */; };
 		6B976EA6EC1E621FE6E5773F /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325EED980A3D0AAECFCEA2BC /* QuizView.swift */; };
@@ -48,10 +50,12 @@
 		44DDE28423F3B193FA6BFE64 /* DSChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSChip.swift; sourceTree = "<group>"; };
 		4DF209595118219563BB6645 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		519FF7A9BAF250FD8D92E6F3 /* DSCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSCard.swift; sourceTree = "<group>"; };
+		57677A3F09A15DA5B7568025 /* LexikonEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexikonEntry.swift; sourceTree = "<group>"; };
 		591D3CDFBBD395995B4BBDDF /* DSProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSProgressRing.swift; sourceTree = "<group>"; };
 		64B7B9938D4F04690AFD7049 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		6CEDFFDAE0E192F9759DEC08 /* DSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSButton.swift; sourceTree = "<group>"; };
 		954E6DC5B61F8A822F958CF1 /* FitnessQuizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessQuizApp.swift; sourceTree = "<group>"; };
+		96D0FEFF55F96003F09356A0 /* LexikonBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexikonBank.swift; sourceTree = "<group>"; };
 		9732C7D7F1D13319D0568F39 /* Manrope-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Variable.ttf"; sourceTree = "<group>"; };
 		9B7C80963B02AE16AF387A2B /* QuestionBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBank.swift; sourceTree = "<group>"; };
 		C0AF3F534A055604245F2DEC /* DSStatTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSStatTile.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				0FA58718D5136E1413CD16BF /* Difficulty.swift */,
+				96D0FEFF55F96003F09356A0 /* LexikonBank.swift */,
+				57677A3F09A15DA5B7568025 /* LexikonEntry.swift */,
 				F64E05ADB2059A48B9182061 /* Question.swift */,
 				9B7C80963B02AE16AF387A2B /* QuestionBank.swift */,
 				1A6125398C5EC16E10616FC0 /* QuizCategory.swift */,
@@ -250,6 +256,8 @@
 				A340CD9B7DBC4C321C00A125 /* DSWashedScreen.swift in Sources */,
 				D325AD03E0F8261AC9134665 /* Difficulty.swift in Sources */,
 				CDA707BEC8F540D481C77ED8 /* FitnessQuizApp.swift in Sources */,
+				01A9931711A3965A2392918B /* LexikonBank.swift in Sources */,
+				3EAAEF6582AF454052771F78 /* LexikonEntry.swift in Sources */,
 				F0F820FB86A89BEAF815659D /* Motion.swift in Sources */,
 				BD599FAAFE1CEA9A65FEC679 /* Question.swift in Sources */,
 				C79E5BB7DF5C6FCC205E16FE /* QuestionBank.swift in Sources */,
